@@ -1,0 +1,15 @@
+{% extends 'myBlog/base.html' %}
+{% block content %}
+<h1>New Post</h1>
+<div class="container">
+    <form method="POST">
+        <label for="author"></label>
+        <input type="text", name="author">
+
+        <label for="title">Title</label>
+        <input type="text", name="title">
+
+        <label for="text">text</label>
+        <input type="text",name="text">
+    </form>
+</div>

@@ -1,0 +1,6 @@
+{% extends 'myBlog/base.html' %}
+{% blockcontent %}
+{% for post in post_detail %}
+  {{ post.title }}
+  {{ post.text }}
+{% endfor %}
