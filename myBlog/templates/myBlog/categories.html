@@ -1,0 +1,18 @@
+{% block content %}
+
+<h1>Categories</h1>
+{% for post in category_post %}
+
+<li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - {{ post.author }}
+      <br/>
+        {{ post.text }} -
+
+         {{ post.category }}
+        {% if user.is_authenticated %}
+            <a href="{% url 'update-post' post.pk %}">Edit</a></li>
+         {% endif %}
+
+{% endfor%}
+{{ cats }}
+
+{% endblock %}

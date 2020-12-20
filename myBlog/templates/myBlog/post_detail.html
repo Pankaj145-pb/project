@@ -1,6 +1,17 @@
 {% extends 'myBlog/base.html' %}
-{% blockcontent %}
-{% for post in post_detail %}
-  {{ post.title }}
-  {{ post.text }}
-{% endfor %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>{{ post.title }}</h1>
+<small>Post By - {{ post.author }}</small>
+<br/>
+<hr>
+<h3>  {{ post.text }}</h3>
+
+<br/>
+<a href="{% url 'home' %}">Back</a>
+{% else %}
+ <h2>You Have To login </h2>
+
+{% endif %}
+{% endblock %}

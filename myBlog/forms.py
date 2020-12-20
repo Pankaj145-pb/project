@@ -1,21 +1,25 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from .models import Posts, Category
+from .models import Post, Category
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-    class Meta():
-        model = User
-        fields = ("username", 'email', 'password1', 'password2')
+#choices = [('Technology', 'Technology'), ('Medicine', 'Medicine'), ('Sports', 'Sports'), ]
+
+choices = Category.objects.all().values_list('name', 'name')
+
+choice_list = []
+
+for item in choices:
+    choice_list.append(item)
 
 
 class PostForm(forms.ModelForm):
     class Meta():
-        model = Posts
-        fields = '__all__'
+        model = Post
+        fields = ('title', 'author', 'category', 'text')
 
-class CategoryForm(froms.ModelForm):
-    class Meta():
-        model = Category
-        fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'author': forms.Select(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
+        }
+
