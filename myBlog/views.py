@@ -22,6 +22,9 @@ class PostListView(ListView):
 
      template = "index.html"
 
+class DraftListView(ListView):
+    model = Comment
+    
 @login_required
 def index(request):
     return render(request,'index.html')
