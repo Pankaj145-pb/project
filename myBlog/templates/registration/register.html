@@ -1,19 +1,11 @@
 {% extends 'myBlog/base.html' %}
-{% block content %}
-<div class='jumbotron'>
-    {% if registered %}
-      <h3>Thank you for Registration</h3>
-    {% else %}
-      <h2>Register here</h2>
-      <h3>Fill the form </h3>
+{% block title %}Register{% endblock %}
 
-      <form enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        <input type="submit" name="" value="Register">
-      </form>
-      
-    {% endif %}
-  </div>
-</div>
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
 {% endblock %}

@@ -1,9 +1,68 @@
-{% extends 'myBlog/base.html'%}
-{% block content %}
-<h1>Welcome to Home Page</h1>
-{% for post in post_list %}
-<div class="jumbotron">
-    <h2> {{post.author}}</h2>
-    <p>{{post.title}}</p>
-    <p>{{post.text}}</p>
-</div>
+{% extends 'myBlog/base.html' %}
+{% block content%}
+
+
+
+    <div class="container mt-3">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="demo-content">
+
+
+        <div class="card" style="width: 30rem;">
+          <div class="card-body">
+
+            <h2> Categories  <a href="{% url 'add-category' %}" class="btn btn-primary"> + </a></h2>
+
+                  {% for items in cat_menu %}
+                   
+                  <li> <a href="#"> {{ items }}</a>
+                    {{ post.title }}
+                      
+                    </li>
+                    {% endfor %}
+                    
+
+                  
+
+                           
+                         </div>
+                       </div> 
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="demo-content bg-alt">
+
+                  <div class="card" style="width: 25rem;">
+                    <div class="card-body">
+
+                      <h1>Post <a href="{% url 'create-post' %}" class=" ml-auto btn btn-primary">New Post </a> </h1> 
+                      <ul>
+                      {% for post in object_list %}
+                      
+                          <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - {{ post.author }}
+                            <br/>
+                              {{ post.text }} -
+                      
+                               <a href="{% url 'category' post.category %}"> {{ post.category }}</a>
+                              {% if user.is_authenticated %}
+                                <br/>
+                                  <a href="{% url 'update-post' post.pk %}">Edit</a></li>
+                                  <br/>
+                               {% endif %}
+                               {% endfor %}
+                               </ul>
+            
+          </div>
+        </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+      
+
+
+        {% endblock %}

@@ -1,6 +1,38 @@
 {% extends 'myBlog/base.html' %}
-{% blockcontent %}
-{% for post in post_detail %}
-  {{ post.title }}
-  {{ post.text }}
-{% endfor %}
+{% block content %}
+
+
+    {% if user.is_authenticated %}
+<h1>{{ post.title }}</h1>
+<small>Post By - {{ post.author }}</small>
+<br/>
+<hr>
+<h3>  {{ post.text }}</h3>
+<br/> <br/>
+
+<h2> Comments...</h2>
+
+{% if not  post.comments.all %}
+   No comments 
+   <br/>
+<a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+{% else %}
+  <br/>
+  <a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+  {% for comment in post.comments.all %}
+    <br/>
+       <small> Posted By - {{ comment.name }}</small>
+       <br/>
+        {{ comment.body }}
+   {% endfor %}
+{% endif %}
+
+<br/><br/>
+<a href="{% url 'home' %}">Back</a>
+{% else %}
+ <h2>You Have To login </h2>
+
+<!-- {{ cats }} -->
+
+{% endif %}
+{% endblock %}

@@ -1,20 +1,16 @@
 {% extends 'myBlog/base.html' %}
 {% block content%}
-
 {% if user.is_authenticated %}
-<h1>Add Blog Post</h1>
+<h1>Update Post</h1>
 <div class="form-group">
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn-secondary">Post It</button>
+    <button class="btn btn-secondary">Update It</button>
 </form>
 </div>
-
 {% else %}
-    <h2> You Have To login To Create a post </h2>
+    <h2> You Have Not Login Yet </h2>
 
 {% endif %}
-
-
 {% endblock %}

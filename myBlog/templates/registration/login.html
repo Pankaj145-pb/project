@@ -1,17 +1,11 @@
 {% extends 'myBlog/base.html'%}
-{% blockcontent %}
-<div class='jumbotron'>
-    <h2>Please Login</h2>
+{% block title %}Login{% endblock %}
 
-    <form method="POST", action="{% user_login %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <label for="username">UserName</label>
-        <input type="text", name='username', placeholder="name">
-
-        <label for="password">password</label>
-        <input type="password", name='password',placeholder="pass">
-
-    </form>
-</div>
-{% endblock %}
+{% block content %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+ {% endblock %}

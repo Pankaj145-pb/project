@@ -1,0 +1,21 @@
+{% extends 'myBlog/base.html' %}
+{% block content %}
+
+<h1>Categories</h1>
+
+{% if user.is_authenticated %}
+{% for post in category_post %}
+
+<li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - {{ post.author }}
+      <br/>
+        {{ post.text }} -
+
+         {{ post.category }}
+
+            <a href="{% url 'update-post' post.pk %}">Edit</a></li>
+
+{% endfor%}
+{% endif %}
+
+
+{% endblock %}
