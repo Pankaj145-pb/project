@@ -26,3 +26,15 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', args=(str(self.id)))
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=225)
+    body = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('post-detail', args=(str(self.id)))
+
+    def __str__(self):
+        return self.name

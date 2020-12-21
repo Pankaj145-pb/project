@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post, Category
+from .models import Post, Category, Comment
 from .forms import PostForm
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -32,6 +32,12 @@ class CreatePostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'myBlog/create_post.html'
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    template_name = 'myBlog/add_comment.html'
+    fields = '__all__'
 
 
 class UpdatePostView(UpdateView):

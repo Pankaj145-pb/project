@@ -7,6 +7,21 @@
 <br/>
 <hr>
 <h3>  {{ post.text }}</h3>
+<br/> <br/>
+
+<h2> Comments...</h2>
+
+{% if not  post.comments.all %}
+   No comments
+<a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+{% else %}
+  <a href="{% url 'add-comment' post.pk %}">Add Comment</a>
+  {% for comment in post.comments.all %}
+       {{ comment.name }}
+       <br/>
+        {{ comment.body }}
+   {% endfor %}
+{% endif %}
 
 <br/>
 <a href="{% url 'home' %}">Back</a>
