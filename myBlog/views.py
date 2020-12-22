@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from django.urls import reverse
 from .models import Post, Category, Comment
 from .forms import PostForm
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, CreateView, UpdateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 # # Create your views here.
 
 
@@ -19,7 +18,6 @@ def CategoryView(request, cats):
     category_post = Post.objects.filter(category=cats)
     return render(request, 'myBlog/categories.html', {'cats': cats, 'category_post': category_post})
 
-
 class IndexView(ListView):
     model = Post
     template_name = "myBlog/index.html"
@@ -31,14 +29,16 @@ class IndexView(ListView):
         return context
 
 
-def CategoryListView(request):
-    cat_menu_list = Category.objects.all()
-    return render(request, 'myBlog/category_list.html', {'cat_menu_list': cat_menu_list})
-
-
 class PostDetailView(DetailView):
     model = Post
     template_name = "myBlog/post_detail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(IndexView, self).get_context_data(*args, **kwargs)
+        context['cat_menu'] = cat_menu
+        return context
+
 
 
 class CreatePostView(CreateView):
@@ -63,3 +63,9 @@ class CreateCategoryView(CreateView):
     model = Category
     template_name = 'myBlog/add_category.html'
     fields = ('name',)
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'myBlog/delete_post.html'
+    fields = '__all__'    

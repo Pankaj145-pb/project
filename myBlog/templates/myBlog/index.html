@@ -6,43 +6,59 @@
     <div class="container mt-3">
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="demo-content">
 
 
-        <div class="card" style="width: 30rem;">
-          <div class="card-body">
+        <div class="card" style="width: 20rem; height: 30rem;">
+          <div class="card-body" style="background-color: crimson;">
 
-            <h2> Categories  <a href="{% url 'add-category' %}" class="btn btn-primary"> + </a></h2>
+            <h2 style="font-style: italic; color: aqua;"> Categories  <a href="{% url 'add-category' %}" class="btn btn-primary" style="background-color: darkmagenta; text-align: left;"> + </a></h2>
+
               {% for item in cat_menu %}
 
-              <li><a href="{% url 'category' item %}">{{ item }}</a>
+              <li style="color: rgb(83, 71, 255); "><a href="{% url 'category' item %}" style="color:whitesmoke">{{ item }}</a>
 
                     {% endfor %}
 
                          </div>
-                       </div> 
+                       </div>
+                       </div>     
+                       </div>
 
-                </div>
-            </div>
+
+                       <style>
+
+                         .card-body{
+                          border-radius: 5px;
+                          background: #73AD21;
+                          padding: 20px;
+                          width: 500px;
+                          height: 150px;
+                         }
+
+                       </style>
+
+
             <div class="col-md-6">
                 <div class="demo-content bg-alt">
 
-                  <div class="card" style="width: 25rem;">
-                    <div class="card-body">
+                  <div class="card" style="width: 30rem; height:30rem;">
+                    <div class="card-body" style="background: rosybrown;">
 
-                      <h1>Post <a href="{% url 'create-post' %}" class=" ml-auto btn btn-primary">New Post </a> </h1> 
+                      <h1 style="font-style: italic;">Posts <a href="{% url 'create-post' %}" class=" ml-auto btn btn-primary">New Post </a> </h1> 
                       <ul>
                       {% for post in object_list %}
                       
-                          <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> - {{ post.author }}
+                          <li style="font-style: medium;"><a href="{% url 'post-detail' post.pk %}" style="font-style: oblique; color: red;">{{ post.title }}</a> - {{ post.author }}
                             <br/>
                               {{ post.text }} -
                       
-                               <a href="{% url 'category' post.category %}"> {{ post.category }}</a>
+                               <a href="{% url 'category' post.category %}" style="font:bolder; color:midnightblue;"> {{ post.category }}</a>
                               {% if user.is_authenticated %}
                                 <br/>
-                                  <a href="{% url 'update-post' post.pk %}">Edit</a></li>
+                                  <a href="{% url 'update-post' post.pk %}">Edit</a>
+                                  <a href="{% url 'delete-post' post.pk %}">Delete</a></li>
                                   <br/>
                                {% endif %}
                                {% endfor %}
