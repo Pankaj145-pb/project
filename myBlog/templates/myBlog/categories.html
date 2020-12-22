@@ -1,8 +1,7 @@
 {% extends 'myBlog/base.html' %}
 {% block content %}
 
-<h1>Categories</h1>
-
+<h1>{{ cats }}</h1>
 {% if user.is_authenticated %}
 {% for post in category_post %}
 

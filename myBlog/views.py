@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from .models import Post, Category, Comment
 from .forms import PostForm
 from django.views import generic
@@ -18,6 +19,7 @@ def CategoryView(request, cats):
     category_post = Post.objects.filter(category=cats)
     return render(request, 'myBlog/categories.html', {'cats': cats, 'category_post': category_post})
 
+
 class IndexView(ListView):
     model = Post
     template_name = "myBlog/index.html"
@@ -27,6 +29,11 @@ class IndexView(ListView):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
         context['cat_menu'] = cat_menu
         return context
+
+
+def CategoryListView(request):
+    cat_menu_list = Category.objects.all()
+    return render(request, 'myBlog/category_list.html', {'cat_menu_list': cat_menu_list})
 
 
 class PostDetailView(DetailView):

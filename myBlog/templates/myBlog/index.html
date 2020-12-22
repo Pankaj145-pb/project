@@ -14,19 +14,12 @@
           <div class="card-body">
 
             <h2> Categories  <a href="{% url 'add-category' %}" class="btn btn-primary"> + </a></h2>
+              {% for item in cat_menu %}
 
-                  {% for items in cat_menu %}
-                   
-                  <li> <a href="#"> {{ items }}</a>
-                    {{ post.title }}
-                      
-                    </li>
+              <li><a href="{% url 'category' item %}">{{ item }}</a>
+
                     {% endfor %}
-                    
 
-                  
-
-                           
                          </div>
                        </div> 
 
