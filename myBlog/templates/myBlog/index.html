@@ -1,7 +1,10 @@
 {% extends 'myBlog/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'myBlog/css/style.css' %}">
+
 {% block content%}
 
-
+{% if user.is_authenticated %}
 
     <div class="container mt-3">
         
@@ -11,48 +14,90 @@
 
 
         <div class="card" style="width: 20rem; height: 40rem;">
-          <div class="card-body" style="background-color: crimson;">
+          <div class="card-body" style="background-color:#0b090a">
 
-              <h2 style="font-style: italic; color: aqua;"> Categories <a href="{% url 'add-category' %}" class="btn btn-primary" style="float:right;"> + </a> </h2>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  +
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+
+        <div class="form-group">
+          <form method="post" action="{% url 'add-category' %}">
+              {% csrf_token %}
+              <input type="text" name="text">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Add Category</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        
+
+              <h2 style="font-style:italic; color:#9d0208;"> Categories <a href="{% url 'add-category' %}" class="btn btn-primary" style="float:right;"> + </a></h2>
 
               {% for item in cat_menu %}
               <div class="d-flex flex-column bd-highlight mb-3">
 
-                  <li style="color: rgb(83, 71, 255); "><a href="{% url 'category' item %}" style="color:whitesmoke">{{ item }}</a>
+                <li><a href="{% url 'category' item %}" style="color: #caf0f8;">{{ item }}</a>
 
-                    {% endfor %}
-              </div>
-
+                  {% endfor %}
+        
                          </div>
                        </div>
-                       </div>     
+                       </div> 
                        </div>
+            </div>
 
 
 
+          
             <div class="col-md-8">
-                <div class="d-flex flex-row-reverse bg-secondary .align-self-*-end">
+                <div class="d-flex flex-row-reverse bg-secondary">
                 <div class="demo-content bg-alt">
 
                   <div class="card" style="width: 40rem; height:40rem;">
-                    <div class="card-body" style="background: rosybrown;">
+                    <div class="card-body" style="background-color:#0b090a">
 
-                      <h1 style="font-style: italic;">Posts <a href="{% url 'create-post' %}" class=" ml-auto btn btn-primary" style="float:right;">New Post </a> </h1>
+                      <h1 style="font-style:normal; color: #9d0208;">Posts <a href="{% url 'create-post' %}" class=" ml-auto btn btn-primary" style="float:right;">New Post </a> </h1>
                       <ul>
                       {% for post in object_list %}
                       
-                          <li style="font-style: medium;"><a href="{% url 'post-detail' post.pk %}" style="font-style: oblique; color: red;">{{ post.title }}</a> - {{ post.author }}
-                            <br/>
-                              {{ post.text }} -
+                          <li style="font-style: medium;"><a href="{% url 'post-detail' post.pk %}" style="font-style:medium; color:#00b4d8;">{{ post.title }}</a></li>  <li style="font-size: medium; color: #00b4d8;">{{ post.author }}</li>
+                          
+                              <h5 style="color: #ffffff;">{{ post.text }}</h5>
                       
-                               <a href="{% url 'category' post.category %}" style="font:bolder; color:midnightblue;"> {{ post.category }}</a>
+                               <a href="{% url 'category' post.category %}" style="font:bolder; color:#00b4d8;"> {{ post.category }}</a>
                               {% if user.is_authenticated %}
                                 <br/>
-                                  <a href="{% url 'update-post' post.pk %}">Edit</a>
-                                  <a href="{% url 'delete-post' post.pk %}">Delete</a></li>
+                                  <a href="{% url 'update-post' post.pk %}" style="color:#00b4d8;">Edit</a>
                                   <br/>
+                                  <a href="{% url 'delete-post' post.pk %}" style="color:#c32f27;">Delete</a></li>
+                                  <br/>
+            
                                {% endif %}
                                {% endfor %}
+                               {% endif %}
                                </ul>
             
           </div>
@@ -61,6 +106,7 @@
 
                 </div>
             </div>
+        </div>
         </div>
         </div>
       

@@ -1,15 +1,16 @@
 {% extends 'myBlog/base.html' %}
+{% load static %}
 {% block content%}
 
 
 <h1>Add Comment</h1>
 <br/>
 <br/>
-<div class="form-group">
+<div class="form-group"> 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn-secondary">Add Comment</button>
+    <button class="btn btn-secondary" style="margin:100px 50px 20px 150px">Add Comment</button>
 </form>
 </div>
 
